@@ -1,0 +1,15 @@
+{% extends 'layouls/index.html' %}
+
+{% block contendt %}
+    <div class ="product_block">
+        <div class="info">
+            <h1>{{ products.title }}</h1>
+            <h4>{{ products.description }}</h4>
+            <h5>Rate: {{ post.rate }}</h5>
+            <div class="dates">
+                <h5>Created Date {{ products.create_date }}</h5>
+                <h5>Modified Date {{ products.modified_date }}</h5>
+            </div>
+        </div>
+    </div>
+{% endblock %}
