@@ -5,13 +5,11 @@ from products.models import Product
 def products_view(request):
     if request.method == 'GET':
         products = Product.objects.all()
-
-        data = {
+        context = {
             'products': products
         }
 
-        return render(request, 'products/products.html', context=data)
-
+        return render(request, 'products/products.html', context=context)
 
 
 def main_view(request):
@@ -21,10 +19,11 @@ def main_view(request):
 
 def product_detail_view(request, id):
     if request.method == 'GET':
-        products = Product.objects.get(id=id)
+        product = Product.objects.get(id=id)
 
         context = {
-            'products': products
+            'products': product,
+            'reviews': product.review_set.all()
         }
 
         return render(request, 'products/detail.html', context=context)
