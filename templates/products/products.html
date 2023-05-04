@@ -1,6 +1,13 @@
 {% extends 'layouls/index.html' %}
 {% block content %}
+    <div class="search">
+        <form action="/products/" method="get">
+            <input type="text" name="search">
+            <input type="submit" value="Search">
+        </form>
+    </div>
     <div style="display: flex; justify-content: space-between; flex-wrap: wrap">
+        <div class="search"></div>
         {% for product  in products %}
             <div class="card" style="width: 18rem;">
                 <div class="card-body">

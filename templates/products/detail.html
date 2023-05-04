@@ -1,61 +1,60 @@
 {% extends 'layouls/index.html' %}
-{% load static %}
 
 {% block content %}
     <style type="text/css">
-        .product {
+        .post_block{
             width: 80%;
             margin-left: 10%;
-
-        }
-        .product > img {
-            width: 30%;
-            margin-left: 33%;
+            margin-top: 50px;
+    }
+        .post_block > img {
+            width: 100%;
         }
         .dates {
+            margin-top: 20px;
             display: flex;
             justify-content: space-between;
-            margin-top: 40px;
         }
         .comments {
-            margin-top: 20px;
+            margin-top: 30px;
         }
         .comment_block {
-            padding: 10px;
-            background: #1b1b1b;
-            color: white;
+            background: #242b2e;
             margin-bottom: 20px;
-        }
-        .comments_title {
-            font-size: 30px;
-            font-weight: bold;
-            margin-top: 40px;
+            color: #ffffff;
+            padding: 10px;
         }
     </style>
-    <div class="product">
-        {% if product.image %}
-            <img class="product_image" src="/media/{{ product.image }}" alt="">
+
+
+    <div class="post_block">
+        {% if product.image  %}
+            <img src="/media/{{ product.image }}" alt="">
         {% else %}
-            <img src="https://i1.wp.com/gelatologia.com/wp-content/uploads/2020/07/placeholder.png?ssl=1" alt="">
+           <img src="https://i1.wp.com/gelatologia.com/wp-content/uploads/2020/07/placeholder.png?ssl=1" alt="">
         {% endif %}
-        <h1>{{ product.title }}</h1>
-        <h5>{{ product.description }}</h5>
-        <div class="dates">
-            <h6>{{ product.created_date }}</h6>
-            <h6>{{ product.modified_date }}</h6>
+        <div class="info">
+            <h1>{{product.title}}</h1>>
+            <h4>{{ product.description }}</h4>
+            <h5>Rate: {{ product.rate }}</h5>>
+            <div class="dates">
+                <h5>Created Date {{ product.created_date }}</h5>>
+                <h5>Modified Date {{ product.modified_date }}</h5>>
+            </div>
+        </div>>
+        <div class="comments_create">
+            <form action="/products/{{ product.id }}/" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" value="comment">
+            </form>
         </div>
-        <p class="comments_title">Comments</p>
-        <form action="/products/{{ product.id }}/" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Add Review">
-        </form>
         <div class="comments">
             {% for comment in comments %}
                 <div class="comment_block">
-                    <h6>{{ comment.text }}</h6>
+                    <h5>{{ comment.text }}</h5>
                 </div>
             {% endfor %}
         </div>
-    </div>
+    </div>>
 {% endblock %}
